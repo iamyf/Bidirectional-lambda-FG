@@ -240,6 +240,19 @@ Practically, a $\lambda_{FG}$ expression usually specifies a forward transformat
 
 \subsection{Local Trace Information}\label{subsec:local}
 
+Recall the semantics in $\lambda_{FG}$, a view is obtained by evaluating a $\lambda_{FG}$ expression with an ordered graph. Every node in the view graph is either a graph obtained from the source graph, or a node constructed by te $\lambda_{FG}$ expression, except the node generated through a structural recursion(in bulk semantics). For an arbitrary structural recursion function $\mathbf{srec}(e_1,d)(e_2)$, the input of the body function $e_1$ is evaluated binding variables from a part of evaluated result in $e_2$; and the input of the rearrangement $d$ function is evaluated by binding variables from the result in $e_1$. So the node in the result graph may originate from not only the whole $srec$ expression but also a sub-expression in $e_2$. Thus, a more complicated inductively defined trace information should be added on the nodes on the result graph.
+
+Here, we use the a \emph{traceable view} in which each node has information for tracing its origin. This locally added information, called $TraceID$, is defined by
+
+$$\begin{array}{lll}
+TraceID &\coloneqq	&SrcID\\
+	&\mid		&Code\,Pos\,Marker\\
+	&\mid		&RecN\,Pos\,TraceID\,Marker\\
+	&\mid		&RecE\,Pos\,TraceID\,TraceID\,Num\\
+	&\mid		&RecM\,Pos\,Marker\,TraceID\,Num\\
+	&\mid		&RecD\,Pos\,TraceID\,TraceID
+\end{array}$$
+
 \subsection{Enriched Forward Semantics}\label{subsec:fwd-sem}
 
 
