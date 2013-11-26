@@ -33,13 +33,13 @@
 \begin{document}
 \maketitle
 
-\section{Introduction}\label{sec-intro}
+\section{Introduction}\label{sec:intro}
 
-\section{Ordered Graphs and Bisimilarity Equivalence}\label{sec-order}
+\section{Preliminaries}\label{sec:pre}
 
 Ordered graphs is a graph model in which the branchings are ordered. We start from introducing a formal definition for ordered graphs, and give a bisimilarity equivalence relation on the ordered graphs.
 
-\subsection{Ordered Graphs}
+\subsection{Ordered Graphs}\label{subsec:order-graph}
 
 The graphs we treated here are multi-rooted, directed, and edge-labeled graphs with order on outgoing edges. This graph model has three prominent features: \emph{$\epsilon$-edges}, \emph{markers}, and \emph{graph concatenation}. An $\epsilon$-edges represents the a shortcut between two nodes, it is similar with the $\epsilon$-transition in automata. Markers can be treated as interfaces that connect the nodes to other graphs. A node can be marked with \emph{input} and \emph{output markers}. Graph concatenation sequentially aligns two graphs in a given order.
 
@@ -57,14 +57,14 @@ We denote a graph with the input marker set $X$ and the output marker set $Y$ by
 
 For the markers, we allow a graph to have multiple roots. When the graph is single-rooted, we often use $\&$ as the \emph{default marker} to indicate the root and use $\G_Y$ ot denote $G^{\{\&\}}_Y$. 
 
-\subsection{Graph Constructors}
+\subsection{Graph Constructors}\label{subsec:graph-constr}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{fig1.png}
 	\caption{Graph Constructors}
-	\label{fig-graph-constr}
+	\label{fig:graph-constr}
 \end{figure}
-Figure \ref{fig-graph-constr} sumarizes the nine costructors we used to describe arbitrary graphs.
+Figure \ref{fig:graph-constr} sumarizes the nine costructors we used to describe arbitrary graphs.
 $$\begin{array}{lcll}
 G	&\Coloneqq	&\Emp	&\mbox{\{ single node graph \}}\\
 	&\mid	&G_1\Cao G_2	&\mbox{\{ graph concatenation \}}\\
@@ -79,7 +79,7 @@ G	&\Coloneqq	&\Emp	&\mbox{\{ single node graph \}}\\
 
 The single node graph constructor $\Emp$ construct a root-only graph. $G_1\Cao G_2$ adds two $\epsilon$-edges from a new root to the roots of $G_1$ and $G_2$, respectively. $\Lef a:G\Rig$ constructs a graph adding an $a$ labeled edge point to the root of $G$. $\Lef\&y\Rig$ constructs a single node graph with an output marker $\&y$. $\&x\coloneqq G$ associates an input marker $\&x$ to the root node of $G$. $()$ constructs an empty graph with neither a node or an edge. Furthermore, $G_1\oplus G_2$ constructs a graph by using a componentwise $(V,B,I)$ union, $\Cao$ differs from $\oplus$ in that $\Cao$ unifies input nodes while $\oplus$ does not. $\oplus$ requires them to be identical. $G_1 @G_2$ composes two graphs by connecting the output nodes of $G_1$ with the corresponding input nodes of $G_2$ with $\epsilon$ edges. $\mathbf{cycle}(G)$ connects the output nodes of $G$ with the corresponding input nodes with $\epsilon$ edges, that will form cycles. The newly constructed nodes have unique identifiers. The formal definition of the sementics is given in $\lambda_{FG}$. 
 
-\subsection{Proper Branches}
+\subsection{Proper Branches}\label{subsec:proper-b}
 
 In the definition of ordered graphs, the $\epsilon$-edges are introduced to represent the shortcut between nodes. We need to relate two connected nodes by \emph{proper branch}, where we can ignore the shortcuts. A \emph{proper branch} of a node $v$ is defined as a path from $v$ going through zero or more $\epsilon$-edges until it reaches a non-$\epsilon$-edge or output marker.
 
@@ -92,7 +92,7 @@ Like the order on the branches, a total order is introduced on proper branches. 
 
 For a given proper branch $p$, we use $p.last$ to denote the last step of the branch sequence, which is either a non-$\epsilon$ edge or a output marker.
 
-\subsection{Bisimilarity for Ordered Graphs}
+\subsection{Bisimilarity for Ordered Graphs}\label{subsec:bis}
 
 For the soundness of the graph model, we need an equivalence relation that can judge whether two arbitrary graphs are the same. At first glimpse, graph isomophism is the most straight forward approach. However, it is not necessarily that two graphs are isomophic when they behaves the same. Another option is language equivalence, which is focused on the language produced by the graphs, But unfortunately, it is proved to be undecidable in automata theory. Semantic equivalence is widely used in program verification to overcome the above difficulties. Bisimilarity is a kind of semantic equivalence, which is focused on the observable behavior of the graphs. 
 
@@ -109,7 +109,7 @@ The notion of bisimilarity only consider the reachable part of a given graph. Th
 
 \section{$\lambda_{FG}$: A Transformation Language for Ordered Graphs}\label{sec-lambda}
 
-\subsection{The Core $\lambda_{FG}$}
+\subsection{The Core $\lambda_{FG}$}\label{subsec:core}
 
 $\lambda_{FG}$ is a transformation language for transforming (querying) ordered graphs. There is a formal semantics for constructing and querying an ordered graph in $\lambda_{FG}$. It is an extenstion of typed $\lambda$-calculus with graph constructors and list functions. It has a powerful feature of structural recursion. It is capable of querying with manipulating the sibling of nodes, which gives a great expresiveness power to the language. The syntex of $\lambda_{FG}$ is given as below. It also has a system of strictly defined type inference rules.
 $$\begin{array}{lclr}
@@ -140,7 +140,7 @@ f(())	&=&	()\\
 f(g_1\oplus g_2)	&=&	f(g_1)\oplus f(g_2)
 \end{array}$$
 
-\begin{example}\label{ex-a2dxc}
+\begin{example}\label{ex:a2dxc}
 This example shows how to manipulate edges of the graph and change its shape by structural recursion, The following function $a2d\_xc$ replaces all labels $a$ with $d$ and contracts $c$-labeled edges. 
 $$\begin{array}{lll}
 a2d\_xc	&=\mathbf{srec}(rc,\mathbf{foldr}(\Cao,\Emp))&	\\
@@ -151,7 +151,7 @@ a2d\_xc	&=\mathbf{srec}(rc,\mathbf{foldr}(\Cao,\Emp))&	\\
 
 Compared with the structural recurcion in UnCAL, structural recurtion in $\lambda_{FG}$ can deal with orered graphs and computations on the sibling dimension of graphs. This ability is given by the function of $d$. 
 
-\subsection{Bulk Semantics of Structural Recursion}
+\subsection{Bulk Semantics of Structural Recursion}\label{subsec:bulk}
 
 The structural recursion of $\lambda_{FG}$ has two equivalent semantics. One is \emph{recursive semantics}. It defines the function behavior and the program transformation/optimization recursively. It appears to be more concise and is useful for reasoning. Another one is \emph{bulk semantics}. By allowing $\epsilon$-edges, we can evaluate a structural recursion in a \emph{bulk} manner. The bulk semantics consider the transformation on a whole. It is useful in parallel computation and the proof of termination and finiteness-preserving property. In the construction of bidirectional semantics, we will also apply the bidirectionlization on bulk semantics.
 
@@ -166,13 +166,13 @@ Here, $e$ is the body function of the transformation on edges. it performs a sim
 	\item Groups new graphs with $\epsilon$-edges: to get the final result, the graphs for each node need to be grouped by $\epsilon$-edges. The $\epsilon$-edges are added according to the input and output markers of the previous result. 
 \end{enumerate}
 
-\section{An Overview of Bidirectional Transformation}\label{sec-over}
+\section{An Overview of Bidirectional Transformation}\label{sec:overview}
 
 In UnCAL, there is a framework that could bidirectionalize unordered graph transformation. It consists of a two stage bidirectionalizing strategy and it could solve the problem that the graphs may contain shared nodes or cycles. This framework provides us a some heuristic idea to do the bidirectionalizing on $\lambda_{FG}$. 
 
 The challenging parts of bidirectionalizing on $\lambda_{FG}$ comes from the $d$ function in the structural recursion. It leads to a three step bulk semantics, which would make it hard to trace back from the view. Further, the $d$ function only accepts graphs without $\epsilon$-edges. Thus, an $\epsilon$-elimination procedure has to be applied before the structural recursion for an arbitrary graph. Also, the $\epsilon$-edge should be eliminated before it is presented to the customer. Moreover, the order of the branchings must be treated carefully in our bidirectionalization. 
 
-\subsection{Bidirectional Properties}
+\subsection{Bidirectional Properties}\label{subsec:b-prop}
 
 The goal in bidirectionalizing $\lambda_{FG}$ is to approach the bidirectionalization in ordered graphs by providing a bidirectional semantics in $\lambda_{FG}$. The semantics should have bidirectional properties defined in the previous work in UnCAL. Let $\mathscr{F}\ldbrack e\rdbrack\rho$ denote a forward evaluation (get) of expression $e$ under environment $\rho$ to produce a view, and $\mathscr{B}\ldbrack e\rdbrack(\rho,G')$ denote a backward evaluation (put) of expression $e$ under environment $\rho$ to reflect a possibly modified view $G'$ to the source by computing an updated environment. An \emph{environment} $\rho$ is a mapping with a form $\{\$x\mapsto X,\ldots\}$ where $X$ is a graph $G$ or a label $l$, and $\$x$ is a variable. The transformation need to satisfy the following two important properties:
 
@@ -181,19 +181,19 @@ $$\inference{\mathscr{F}\ldbrack e\rdbrack\rho=G}{\mathscr{B}\ldbrack e\rdbrack(
 
 The (GETPUT) property states that unchanged view $G$ should give no change on the environment $\rho$ in the backward evaluation, while the (WPUTGET) property states that the modified view $G'$ and the view obtained by backward evaluation followed by forward evaluation may differ, but both view have the same effect on the original source if backward evaluation is applied. A pare of forward and backward evaluation is \emph{well-behaved} if it satisfies (GETPUT) and (WPUTGET) proties. In the rest of the paper, the forward and backward evaluations will be presented for $\lambda_{FG}$, and the following theorem holds.
 
-\begin{theorem}[Well-behavedness]\label{th-wellb}
+\begin{theorem}[Well-behavedness]\label{th:wellb}
 The proposed forward and backward evaluations are well-behaved, provided their evaluations succeed.
 \end{theorem}
 
 According to the (WPUTGET) property, given a certain forward evaluation function, there could be more than one backward evaluation that would satisfy the well-behavedness property. When we perform the modification on the view, the most reasonable choice is to reflet it on the corresponding part on the source. This is the \emph{location correspondence} property. Moreover, the modification on the view graph could be categorised into three types: in place updates, edge deletion and edge insertion. In order to maintain the well-behavedness between the updated source and the modified view, we also need to apply some operation on the source. A reasonable assumption is that a certain type of modification on the view yields the same type of operation on the source, which could be called the \emph{operation correspondence} property.
 
-\begin{theorem}[Rationality]\label{th-rat}
+\begin{theorem}[Rationality]\label{th:rat}
 The proposed bidirectional transformation on $\lambda_{FG}$, satisfies both location and operation correspondence property. We call it a rational transformation.
 \end{theorem}
 
 The rationality property is also important as it gives us a discriptive goal in designing the bidirectionalizing the transformation. The goal is to let the updates on the source to meet the intention of the changing on the view.
 
-\subsection{Three-Stage Bidirectionalization}
+\subsection{Three-Stage Bidirectionalization}\label{subsec:3-sta}
 
 In an arbitrary transformation, there could be a big gap between the source and view graoh. It makes it hard to reflect changes on the view to the source. The basic idea to divide the forward evaluation into three stages, each one could be bidirectionalized.
 \begin{itemize}
@@ -204,19 +204,19 @@ In an arbitrary transformation, there could be a big gap between the source and 
 
 In our bidirectional transformation framework, we will propose a general bidirectionalized $\epsilon$-edge elimination procedure for both Stage 1 and Stage 3. For Stage 2, a bidirectionalized semantics for $\lambda_{FG}$ is provided in this paper. Thus, the whole transformation is bidirectionlized by a inductively defined procedure.
 
-\section{Bidirectionalizing $\epsilon$-elimination procedure}\label{sec-eps}
+\section{Bidirectionalizing $\epsilon$-elimination procedure}\label{sec:eps}
 
 In the previous work of $\lambda_{FG}$, the input graph of the $d$ function in structural recursion does not accept any $\epsilon$-edges. However, we can not safely assume that an arbitrary input graph does not contain any $\epsilon$-edges. Further, after applying the transformation via bulk semantics, some $\epsilon$-edges might be introduced to maintain the structure of the result graph. In most applications, $\epsilon$-edges are assumed to be unobservable. Thus, we wish to produce a view without any $\epsilon$ to the users. In this seciton, a bidirectionalized $\epsilon$-elimination procedure is proposed. 
 
 First, there is an effective procedure that whether the $\epsilon$-elimination could be applied successfully on a finte ordered graph $G$. The details could be found in the paper of $\lambda_{FG}$.
 
-\begin{lemma}
+\begin{lemma}\label{lamma:eps-exists}
 Given an finite ordered graph $G$ possibly with $\epsilon$-edges, there is an effective procedure to decide whether there exists an ordered graph $G'$, s.t. $G\sim G'$ and has neither $\epsilon$-edges nor infinite width. If yes, produce such $G'$.
 \end{lemma}
 
 The idea of the $\epsilon$-elimination procedure is to use labeled edges to connect the shortcut between proper branches, the procedure is defined as below. Note that we use a list of integers to represent the total orders over the branches and proper branches on a node.
 
-\begin{definition}\label{def-epsilon}
+\begin{definition}\label{def:epsilon}
 For a graph $G=(V,B,I)\in\Gc^X_Y$, the $\epsilon$-elimination $\epsilon\mbox{-elim}(G)$ of $G$ is a graph $(V,B'I)\in\Gc^X_Y$ where $|B'(v)|\stackrel{def}{=}Pb(G,v)$, and $B'(v).\tilde{p}\stackrel{def}{=}Pb(G,v).\tilde{p}.last$ for $p=(v\act{\epsilon}_{i_0}\ldots v_n\act{}_{i_n})$ in $B'(v)$.
 \end{definition}
 
@@ -230,15 +230,26 @@ Next we will introduce how to reflect view updates within $\epsilon\mbox{-elim}(
 
 After we have done the update operation on the source, an $\epsilon$-elimination procedure need to be applied again on the updated source. The reason is that, the updated labeled edge may be duplicated in different proper branches. Thus, the corresponding edge of these proper branches on the view graph also need to be updated to mainain the consistency between the source and the view. For inplace updates and edge deletion, the corresponding edge is deleted on the view, and for edge insertion, the edge is added according to the newly added proper branches. Therefore, the whole procedure would satisfy the well-behavedness. Moreover, the rationality is also infered from this constructive bidirectionalizing procedure.
 
-\begin{lemma}\label{lemma-well-epsilon}
+\begin{lemma}\label{lemma:well-epsilon}
 The proposed bidirectionalized $\epsilon$-elimination procedure satisfy the well-behavedness and the rationality property.
 \end{lemma}
 
-\section{Traceble Forward Evaluation}\label{sec-fwd}
+\section{Traceble Forward Evaluation}\label{sec:fwd}
+
+Practically, a $\lambda_{FG}$ expression usually specifies a forward transformation that maps a source ordered graph (possibly a database or an XML file) to a view graph. A backward transformation for this procedure specifies how to reflect view updates to the source graph. However, the structural information kept by $\epsilon$-edges will not appear explicitely in the view graph. Moreover, the newly created parts within the transformation procedure also make it hard to detect the generated source for everything in the view graph. In this sence, some appropriate trace information should be added to the view, to make the view more informative, in other words, \emph{traceable}. In this section, we will enrich the original semantics of $\lambda_{FG}$ to make it produces traceable view after forward transformation.
+
+\subsection{Local Trace Information}\label{subsec:local}
+
+\subsection{Enriched Forward Semantics}\label{subsec:fwd-sem}
 
 
-\section{Backward Evaluation}\label{sec-bak}
+\section{Backward Evaluation}\label{sec:bak}
 
-\section{Conclusion}\label{sec-con}
+\subsection{Reflection of Inplace Updates}\label{subsec:bak-inp}
+
+\subsection{Reflection of Edge Deletion}\label{subsec:bak-del}
+
+\subsection{Reflection of Edge Insertion}\label{subsec:bak-ins}
+\section{Conclusion}\label{sec:con}
 
 \end{document}
