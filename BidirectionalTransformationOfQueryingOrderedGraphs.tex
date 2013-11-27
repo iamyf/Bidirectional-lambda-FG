@@ -253,9 +253,13 @@ TraceID &\coloneqq	&SrcID\\
 	&\mid		&RecD\,Pos\,TraceID\,TraceID
 \end{array}$$
 
+Where $SrcID$ ranges over the identifiers uniquely assigned to all nodes in the source graph, $Pos$ ranges over code positions in the $\lambda_{FG}$ expressions, $Marker$ ranges over input/output makers, and Num ranges over the lists of integers, which represent the order of the branches. 
+
+Now we briefly expain the meaning of each $TraceID$. $SrcID$ means the node is generated from the corresponding one in the source. $Code\,Pos\,Marker$ is the information for the nodes created by the $\lambda_{FG}$ expreesion on the marked code position. $RecN,\,RecE,\,RecM,\,RecD$ are four kinds of trace information used in bidirectionalizing structural recursion $\mathbf{srec}(e,d)$. $RecN\,RecE\,RecM$ represent the node in the intermediate result after $e$ is applied, which are generated from the nodes/edges/markers respectively, and $RecD$ information is added when the rearrangements on the lists are applied by $d$. 
+
 \subsection{Enriched Forward Semantics}\label{subsec:fwd-sem}
 
-
+Now we will define the enriched forward semantics of $\lambda_{FG}$ that could generate a traceable view. Recall the core of $\lambda_{FG}$ language introduced in \ref{subsec:core}, 
 \section{Backward Evaluation}\label{sec:bak}
 
 \subsection{Reflection of Inplace Updates}\label{subsec:bak-inp}
