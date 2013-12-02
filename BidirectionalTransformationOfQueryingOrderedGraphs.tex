@@ -356,7 +356,7 @@ It first evaluates the conditional expression $e_1$, and with the result it choo
 
 $\mathscr{F}\ldbrack(\mathbf{isEmpty}(e))^p\rdbrack\rho=\mathbf{isEmpty}(\mathscr{F}\ldbrack e\rdbrack\rho)$
 
-\textbf{Function on Lists} For the function on the lists, there is a formal way to bidirectionalize them done by previous work. So we will not talk about its details.
+\textbf{Function on Lists} For the function on the lists, here we consider it as a polymorphism on the nodes for simplicity, There is a formal way of bidirectionalizing the node polymorohism, which is done by previous work. So we will not include the details.
 
 \textbf{Structural Recursion} The forward semantics of a structural recursion in $\lambda_{FG}$ is given by \emph{bulk semantics}. It can be formally defined by three stages:
 
@@ -418,9 +418,216 @@ $G_{srec}=(\bigcup_{v\in V_{RecN}}V_{RecD_v},\bigcup_{v\in V_{RecN}}B_{RecD_v},I
 \end{enumerate}
 \section{Backward Evaluation}\label{sec:bak}
 
+Thanks to the bulk semantics in $\lambda_{FG}$ and the trace information generated at enriched forward evaluation, the similarity in shape between input and output graphs are retained. As in previous work of unordered graph, the graph constructors become invertible, and the backward evaluation $\mathbf{rec}(e,d)$ is reduced to that of its body $e$ and $d$. We again devide backward evaluation algorithm by updates supported: (1) edge-renaming, (2) edge-deletion, and (3) insertion of edges or a subgraph rooted at a node. In the following, we give the backward semantics for these updates.
+
 \subsection{Reflection of Inplace Updates}\label{subsec:bak-inp}
 
+Backward semantics is, similarly to the forward semantics, defined inductively, i.e. backward evaluation of a $\lambda_{FG}$ expression is computed by combining results of backward evaluations of the operand expressions. We first define backward semantics of the simple expressions, followed by that of structural recursion.
+
+\textbf{Graph Constructor Expressions} 
+
+In order to merge the environment computed by the inductively defined,backward evaluation, we need a to define a merge operator.
+
+$\rho_1 \uplus_{\rho}\rho_2=\left\{(x\mapsto\mathbf{mg}(G,G_1,G_2)
+    \begin{array}{|l}
+     (x\mapsto G_1)\in\rho_1\\
+     (x\mapsto G)\in\rho\\
+     (x\mapsto G_2)\in\rho_2
+    \end{array}
+    \right\}$
+
+$\mathbf{where}\,\mathbf{mg}(G,G_1,G_2)=\left\{
+\begin{array}{ll}
+    G_1 & \mathbf{if}\,G_2=G\vee G_1=G_2\\
+    G_2 & \mathbf{if}\,G_1=G\\
+    FAIL & otherwise
+\end{array}\right.$
+
+$\Emp$, $\&y$ and $()$ construct constant graphs in the forward computation. Therefore, for the backward computation, they accept no modification on the view.
+
+$\mathscr{B}\ldbrack \Emp^p\rdbrack(\rho,G')=\rho\quad if\,G'=\mathscr{F}\ldbrack \Emp^p\rdbrack\rho$\\
+$\mbox{~~~~~}\mathscr{B}\ldbrack \Lef\&m\Rig^p\rdbrack(\rho,G')=\rho\quad if\,G'=\mathscr{F}\ldbrack \Lef\&m\Rig^p\rdbrack\rho$\\
+$\mbox{~~~~~}\mathscr{B}\ldbrack ()^p\rdbrack(\rho,G')=\rho\quad if\,G'=\mathscr{F}\ldbrack ()^p\rdbrack\rho$
+
+$\Lef l:e\Rig$ backward computation detaches (possibly modified) edge from the top of the modified graph. Other modification on the graph is reflected to the other operand $G_2$ (as $G_2'$)
+
+$\mathscr{B}\ldbrack \Lef l:e\Rig^p\rdbrack(\rho,G')=\mathscr{B}\ldbrack l\rdbrack(\rho,a')\uplus_{\rho}\mathscr{B}\ldbrack e\rdbrack(\rho,G_2')$\\
+$\mbox{~~~~}\mathbf{where}\,a=l\rho$\\
+$\mbox{~~~~~~~~~~~~~~}G_2=\mathscr{F}\ldbrack e\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~}(a',G_2')=decomp_{\Lef a:^p G_2\Rig}(G')$
+
+Here, the decompositon function is defined as follows
+
+$decomp_{\Lef a_1:^p G_2\Rig}(G')=\mbox{~~~~}(a_1',(V'\setminus\{r'\},B'\setminus\{r'\mapsto\zeta'\},\{\&\mapsto v\}))$\\
+$\mbox{~~~~}\mathbf{where}\,(V_2,B_2,\{\&\mapsto v\})=G_2$\\
+$\mbox{~~~~~~~~~~~~~~~} (V',B',\{\&\mapsto r'\})=G'$\\
+$\mbox{~~~~~~~~~~~~~~~}\zeta'=\,the\,unique\,branch\,in\,B'\,of\,the\,form\,([\mathbf{Edge}(a_1',v)])$.
+
+The modified view $G'$ is decomposed into its unique root branch $\zeta'=[\mathbf{Edge}(a_1',v)]$ from the original root $r'$ and  the rest of the graph rooted at $v$. If $G'$ has more than one branches from the root node or the new root $v$ does not match the root node of the original result $G_2$, the backward evaluation fails.
+
+$e_1\Cao e_2$ We have the following definition ,given $decomp_{G_1\Cao G_2)}(G')$ as the decomposition of the graph $G'$
+
+$\mathscr{B}\ldbrack (e_1\Cao e_2)^p\rdbrack(\rho,G')=\mathscr{B}\ldbrack e_1\rdbrack(\rho,G_1')\uplus_{\rho}\mathscr{B}\ldbrack e_2\rdbrack(\rho,G_2')$\\
+$\mbox{~~~~}\mathbf{where}\,G_1=\mathscr{F}\ldbrack e_1\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~~~}G_2=\mathscr{F}\ldbrack e_2\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~}(G_1',G_2')=decomp_{G_1\Cao^p G_2}(G')$
+    
+$decomp$ is defined as below. $G_1\setminus G_2$ denotes $(V_1\setminus V_2,B_1\setminus B_2,I_1\setminus I_2)$ where $B_1\setminus B_1$ and $I_1\setminus I_2$ respectively denote removal of bindings in $B_2$ and $I_2$ from those in $B_1$ and $I_1$. Simple union of graphs $G_1\cup G_2$ is defined be $(V_1\cup V_2, B_1\cup B_2, I_1\cup I_2)$.
+
+$decomp_{G_1\Cao^p G_2}(G')=(xreachable(G_1'',G_1),xreachable(G_2'',G_2))$\\
+$\mbox{~~~~}\mathbf{where}\,(V',B',I')=G'\quad(V_i,B_i,I_i)=G_i$\\
+$\mbox{~~~~~~~~~~~~~~~} G_i''=reachable((V',B',I_i))$\\
+$\mbox{~~~~}\mathbf{satisfying}\,M=Dom(I_1)=Dom(I_2)$\\
+$\mbox{~~~~~~~~~~~~~~~}\forall\&m\in M,\,\mathbf{Edge}(\epsilon,v')\in B'(I'(\&m)): (\&m\mapsto v')\in I_1\cup I_2$ \\
+$\mbox{~~~~}unreachable(G)=G\setminus reachable(G)$\\
+$\mbox{~~~~}xreachable(G'',G)=reachable(G'')\cup unreachable(G)$
+
+$e_1\oplus e_2$ It is like $Cao$, except no $\epsilon$-edge is involved.
+
+$\mathscr{B}\ldbrack (e_1\oplus e_2)^p\rdbrack(\rho,G')=\mathscr{B}\ldbrack e_1\rdbrack(\rho,G_1')\uplus_{\rho}\mathscr{B}\ldbrack e_2\rdbrack(\rho,G_2')$\\
+$\mbox{~~~~}\mathbf{where}\,G_1=\mathscr{F}\ldbrack e_1\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~~}G_2=\mathscr{F}\ldbrack e_2\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~~}(G_1',G_2')=decomp_{G_1\oplus^p G_2}(G')$\\
+$\mbox{~~~~~~~~~~~~~~~}decomp_{G_1\oplus^p G_2}(G')=(xreachable(G_1'',G_1),xreachable(G_2'',G_2))$\\
+$\mbox{~~~~~~~~~~~~~~~}\mathbf{where}\,(V',B',I')=G'\quad(V_i,B_i,I_i)=G_i$\\
+$\mbox{~~~~~~~~~~~~~~~~~~~~~~~~~~~} G_i''=reachable((V',B',I_i))$
+
+It is the same as $decomp_{G_1\Cao^pG_2}(G')$ without $\mathbf{satisfying}$ condition.
+
+$e_1 @e_2$ Because of unmatched I/O nodes, it may introduce unreachable part in the second argument during forward computation. Backward computation carefully passes those parts backwards untouched to avoid unnecessary failure because of inconsistency, and these parts are part of ordinary computation (computation on reachable parts) before discarding by the $@$ operator.
+
+$\mathscr{B}\ldbrack (e_1@ e_2)^p\rdbrack(\rho,G')=\mathscr{B}\ldbrack e_1\rdbrack(\rho,G_1')\uplus_{\rho}\mathscr{B}\ldbrack e_2\rdbrack(\rho,G_2')$\\
+$\mbox{~~~~}\mathbf{where}\,G_1=\mathscr{F}\ldbrack e_1\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~~}G_2=\mathscr{F}\ldbrack e_2\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~~}(G_1',G_2')=decomp_{G_1@^p G_2}(G')$
+
+$decomp_{G_1@^p G_2}(G')=(xreachable(G_1'',G_1),xreachable(G_2'',G_2))$\\
+$\mbox{~~~~}\mathbf{where}\,(V',B',I')=G'\quad(V_i,B_i,I_i)=G_i$\\
+$\mbox{~~~~~~~~~~~~~~~}B''=\{ u\mapsto\left[
+    \begin{array}{ll}
+    x.i=\mathbf{Edge}(\epsilon,v)\wedge u\in V_1 &\\
+    \wedge B_1(u).i=\mathbf{Out}m(\&m)&\\
+    \wedge (\&m\mapsto v)\in I_2 & \Rightarrow \mathbf{Out}m(\&m)\\
+    otherwise & \Rightarrow x.i
+    \end{array}\right]_{i\in|x|}|(u\mapsto x)\in B'\}$\\
+$\mbox{~~~~~~~~~~~~~~~}G_i''=reachable((V',B'',I_i))$
+
+$\&m\coloneqq e$ It ``peels off'' the marker on the left hand side from each of the input markers in $G'$ at the front.
+
+$\mathscr{B}\ldbrack(\&m\coloneqq e)^p\rdbrack(\rho,G')=\mathscr{B}\ldbrack e\rdbrack(\rho,G_1')$\\
+$\mbox{~~~~}\mathbf{where}\,(V',B',I')=G'$\\
+$\mbox{~~~~~~~~~~~~~~~}I_1'=\{(\&x\mapsto v)|(\&m.\&x\mapsto v)\in I'\}$\\
+$\mbox{~~~~~~~~~~~~~~~}G_1'=(V',B',I_1')$
+
+ $\mathbf{cycle}(e)$ It removes the $\epsilon$-edges introduced in the forward evaluationo and restores the original output markers.
+
+$\mathscr{B}\ldbrack(\mathbf{cycle}(e))^p\rdbrack(\rho,G')=\mathscr{B}\ldbrack e\rdbrack(\rho,G_2')$\\
+$\mbox{~~~~}\mathbf{where}\,(V',B',I')=G'\quad(V,B,I)=\mathscr{F}\ldbrack e\rdbrack\rho$\\
+$\mbox{~~~~~~~~~~~~~~~} B_{cycle}=\{ u\mapsto\left[
+    \begin{array}{ll}
+    x.i=\mathbf{Edge}(\epsilon,v)&\\
+    \wedge B(u).i=\mathbf{Out}m(\&m)& \Rightarrow \mathbf{Out}m(\&m)\\
+    otherwise & \Rightarrow x.i
+    \end{array}\right]_{i\in|x|}|(u\mapsto x)\in B'\}$\\
+$\mbox{~~~~~~~~~~~~~~~} G_2'=(V,B_{cycle},I)$
+
+\textbf{Labels} A label constant and label equality accepts no modification.
+
+$\mathscr{B}\ldbrack a\rdbrack(\rho,a')=\rho\quad\mathbf{if}\,a'=a$
+
+$\mathscr{B}\ldbrack (l_1=l_2)\rdbrack(\rho,e')=\rho\quad\mathbf{if}\,e'=\mathscr{F}\ldbrack (l_1=l_2) \rdbrack\rho$
+
+\textbf{Variables} A variable simply updates its bindings as $\mathscr{B}\ldbrack\$ v\rdbrack(\rho,G')=\rho[\$v\leftarrow G']$. Here, $\rho[\$v\leftarrow G']$ is an abbreviation for $(\rho\setminus\{\$v\mapsto\_\})\cup\{\$v\mapsto G'\}$.
+
+\textbf{Condition} A backward evaluation of a condition is defined by
+
+$\mathscr{B}\ldbrack (\mathbf{if}\,e_1\,\mathbf{then}\,e_2\,\mathbf{else}\,e_3)\rdbrack(\rho.G')=\left\{
+    \begin{array}{ll}
+     \rho_2'& \mathbf{if}\,\mathscr{F}\ldbrack e_1\rdbrack\rho\wedge\mathscr{F}\ldbrack e_1\rdbrack\rho_2'\\
+     \rho_3'& \mathbf{if}\,\neg\mathscr{F}\ldbrack e_1\rdbrack\rho\wedge\neg\mathscr{F}\ldbrack e_1\rdbrack\rho_3'\\
+     FAIL & otherwise
+    \end{array}
+    \right.$\\
+$\mbox{~~~~}\mathbf{where}\,(\rho_2',\rho_3')=(\mathscr{B}\ldbrack e_2\rdbrack(\rho,G'),\mathscr{B}\ldbrack e_3\rdbrack(\rho,G'))$
+
+which is reduced to the backward evaluation of $e_2$ if $e_1$ holds and to the backward evaluation of $e_3$ otherwise. To guarantee well-behavedness, we further ensure the boolean expression $e_1$ does not change after backward evaluation. Because the result of $e_1$ may be influenced indirectly by backward evaluation of the bodies $e_2$ and $e_3$, if they update variable bindings and the value of variables in the condition is produced from the updated bindings, and check that condition at the expression binding the variables. However, to simplify presentation, we omit this passing around of conditions and checkings in the following.
+
+\textbf{Emptiness} A backward evaluation of an emptiness checking is defined by
+
+$\mathscr{B}\ldbrack\mathbf{isEmpty}(e)\rdbrack(\rho,e')=\rho\quad\mathbf{if}\,e'=\mathscr{F}\ldbrack \mathbf{isEmpty}(e)\rdbrack\rho$
+
+As the reason explained before, we simply does not allow the change of boolean values in the backward evaluation.
+
+\textbf{Structural Recursion} Backward evaluation of a structural recursion function is defined by the following stepwise procedure. It performs the inverse procedure of the forward evaluation. The most crucial point is to use the trace information of structural recursion to decompose the view graph into subgraphs before adding the $\epsilon$-edges. Further, when we merge the updated environment, we first merge local changes, then merge it to the whole changes. Since there might be overlapped parts among theng, we let the backward evaluation fails if the overlapped parts are inconsistant. The backward evaluation of the body expression can be inductively defined.
+
+$\mathscr{B}\ldbrack \mathbf{srec}(e_b,d)(e_a)\rdbrack(\rho,G_{srec}')=\rho'$\\
+$\mbox{~~~~}\mathbf{where}\,(V_{srec}',B_{srec}',I_{srec}')=G_{srec}'$
+\begin{enumerate}
+\item We first decompose the result graph into subgraphs by the trace information on $RecD$ functions. 
+
+$\mbox{~~~~}V_{d_v}'=\{u|v\in V_{RecN},\,(RecD\,p\,u\,v)\in V_{srec}'\}$\\
+$\mbox{~~~~}B_{d_v}'=\{u\mapsto\left[
+    \begin{array}{ll}
+    x.i=\mathbf{Edge}(l_i,RecD\,p\,w_i\,v)& \Rightarrow \mathbf{Edge}(l_i,w_i)\\
+    x.i=\mathbf{Edge}(\epsilon,I_{RecD_v}(\&m,\&v')& \Rightarrow \mathbf{Out}m(\&m,\&v'))\\
+    x.i=\mathbf{Out}m(\&m,\&y) & \Rightarrow x.i
+    \end{array}\right]_{i\in |x|}|v\in V_{RecN},\,((RecD\,p\,u\,v)\mapsto x)\in B_{srec}',\,\&m\in Z,\,v'(\neq v)\in V_{RecN}\}$\\
+$\mbox{~~~~}I_{d_v}'=\{\&m\mapsto u|v\in V_{RecN},\,\&m\in Z,\, RecD\,p\,u\,v\in Range(I_{RecD_v})\}$\\
+$G_{d_v}'=(V_{d_v}',B_{d_v}',I_{d_v}')$
+
+\item Then apply the backward evaluation of function $d$ on each subgraph. Applying decomposition on the result using the trace information of $RecE$ and $RecD$.
+
+$\rho_{d_v}'=\mathscr{B}\ldbrack d_v\rdbrack(\rho_{d_v},G_{d_v}')$\\
+$\mbox{~~~~}V_{u,i}'=\{v|u\in V,\,(RecN\,p\,u\,\&m\mapsto x)\in \rho_{d_{RecN\,p\,u\,\&m}}'(\$b),\,i\in |x|,%\,x.i.I(\&m)=(RecE\,p\,w\,u\,i),
+\,(RecE\,p\,v\,u\,i)\in x.i.V,\,\&m\in Z\}$\\
+
+$\mbox{~~~~}B_{u,i}'=\{v\mapsto\left[
+    \begin{array}{ll}
+    x'.j=\mathbf{Edge}(l_j,RecE\,p\,v_j\,u\,i)& \Rightarrow \mathbf{Edge}(l_j,v_j)\\
+    x'.j=\mathbf{Out}m(\&m,\&(RecN\,p\,u'\,\&m)) & \Rightarrow \mathbf{Out}m(\&m)\\
+    \end{array}\right]_{j\in |x'|}|u\in V,\,(RecN\,p\,u\,\&m\mapsto x)\in \rho_{d_{RecN\,p\,u\,\&m}}'(\$b),\,i\in |x|,
+    %\,x.i.I(\&m)=(RecE\,p\,w\,u\,i),\,
+    \,((RecE\,p\,v\,u\,i)\mapsto x')\in x.i.B\}$\\
+$\mbox{~~~~}I_{u,i}'=\{\&m\mapsto w|u\in V,\,(RecN\,p\,u\,\&m\mapsto x)\in \rho_{d_{RecN\,p\,u\,\&m}}'(\$b),\,i\in |x|,\,x.i.I(\&m)=(RecE\,p\,w\,u\,i)\}$\\
+$G_{u,i}'=(V_{u,i}',B_{u,i}',I_{u,i}')$
+
+\item Apply the backward evaluation of $e$. Finally, reconstruct the updated view.
+
+$\rho_{u,i}'=\mathscr{B}\ldbrack e_b\rdbrack(\rho_{u,i},G_{u,i}')$\\
+%%$\mathbf{where}\, VV_{u,i}\neq\emptyset$\\
+$G'=(V'\cup\bigcup\rho_{v,i}'(\$g).V,B'\cup\bigcup\rho_{v,i}'(\$g),B,I)$\\
+$\mbox{~~~~}\mathbf{where}\,V'=\{\{v\}\cup\{w|Edge(l,w)\in s\}|(v\mapsto s)\in B'\}$\\
+$\mbox{~~~~~~~~~~~~~~~}B'=\{v\mapsto \left[
+    \begin{array}{ll}
+    x.i=\mathbf{Edge}(l_i,v_i)& \Rightarrow \mathbf{Edge}(\rho_{v,i}'(\$l),v_i)\\
+    x.i=\mathbf{Out}m(\&m) & \Rightarrow x.i\\
+    \end{array}\right]_{i\in |x|}|(v\mapsto x)\in B\}$\\
+$\rho'=\mathscr{B}\ldbrack e_a\rdbrack(\rho,G')\uplus_{\rho}\biguplus\{\rho_{v,i}'\setminus\{\$\mapsto\_\}\setminus\{\$g\mapsto\_\}\}$
+
+\end{enumerate}
+
 \subsection{Reflection of Edge Deletion}\label{subsec:bak-del}
+
+Similarly to the treatment in the previous work, we reflect deletion of an edge in the view as deletion of corresponding edge int eh source using trace IDs. In unordered graph, edge is identified by the triple of origin node, label and destination node, but here we can identify with a pair of origin node and branch position.
+
+$corr$ defined below takes a pair of origin node ID and branch position that uniquely identify an edge in the view, and computes the corresponding edge as a pair of origin node ID and branch position in the source.
+
+$corr((u,i))=(u,i)\quad if\, u\in SrcID$\\
+$\mbox{~~~~~~}corr((RecE\,p\,u\,v\,i,j))=\left\{
+		\begin{array}{ll} 
+			corr((u,j)) & if\,corr((u,j))\neq FAIL\\
+			corr((v,i)) & if\,corr((u,j))= FAIL
+		\end{array}\right.$\\
+$\mbox{~~~~~~}corr((RecD\,p\,u\,v,j))=corr((u,j))$\\
+$\mbox{~~~~~~}corr(\zeta)=FAIL\quad otherwise$
+
+$FAIL$ means failure on finding the corresponding edge.
+
+Note that only labeled edges are allowed to be deleted in the view. Thus, the nodes with trace information $RecN$ and $RecM$ will never appear in the input of $corr$.
+
+Using this function, we compute the set of corresponding edges from set of deleted edges on the updated view $G_{view}'$. If one of the computation $corr$ fails, then the backward evaluation fails. Otherwise, we compute the updated source $G_{src}'$ by removal of the set of corresponding edges (branches). Note that we use the list of integers as the branch number, thus the relative position the following (sibling) branches will not change if we delete one edge.
+
+Finally, get the updated view $G_{view}''=\mathscr{F}\ldbrack e\rdbrack\rho[\$g\rightarrow G_{src}']$ in order to keep the consistancy of the well-behavedness between updated source and view. Moreover, we need to check if this updated view is bisimilar to the changed view $G_{view}'$.
 
 \subsection{Reflection of Edge Insertion}\label{subsec:bak-ins}
 \section{Conclusion}\label{sec:con}
