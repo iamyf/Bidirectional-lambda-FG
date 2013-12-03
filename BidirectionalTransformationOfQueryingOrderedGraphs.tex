@@ -21,7 +21,7 @@
 \newcommand{\Gc}{{\mathcal{G}^{c}}}
 \newcommand{\G}{\mathcal{G}}
 
-\title{Bidirectional Transformation of Querying Ordered Graphs}
+\title{Bidirectional Transformation on Ordered Graphs}
 \author{Fei Yang}
 \institute
 { BASICS\\
@@ -33,7 +33,24 @@
 \begin{document}
 \maketitle
 
+
+\begin{abstract}
+The linguistic (language-based) approach plays an important role in development of structured and well-behaved bidirectional transformations. It has been successfully applied to solve the callenging problem of bidirectional transformation on graphs, where a clear bidirectional semantics if given based on a bulk semantics of the structural recursion. However, the graphs that can be dealt with are limited to unordered ones, and it has not yet been known how to treat ordered graphs such as XML graphs in which the child nodes of a node are ordered. $\lambda_{FG}$ is a language for querying ordered graphs, a bulk semantics of structural recursion is provided for ordered graphs. In this paper, we show that ordered graphs can be bidirectionalized by a three-stage procedure. We provided a bidirectionalized procedure to eliminate $\epsilon$-edges. Further, a clear bidirectional semantics for transformation language $\lambda_{FG}$ can be defined. The key technical point is a novel way of bidirectionalizing the bulk semantics in $\lambda_{FG}$.
+\end{abstract}
+
+\keywords{Ordered Graphs, Bidirectional Transformation, Bulk Semantics, $\lambda_{FG}$ Language}
+
 \section{Introduction}\label{sec:intro}
+
+Bidirectional transformation provide a novel mechannism for sychronizing and maintaining the consistency of information between input and output. The are pervasive and has may potential applications, including the synchronization of replicated data in different formats, presentation-oriented structured document development, interactive user interface design, coupled software transformation, and the well-known \emph{view updating} mechanism which has been intensively studied in the database community.
+
+The linguistic (language-based) approach gives a promising way for development of structured and well-behaved bidirectional transformation, in wich every expreesion simultaneously specifies both a forward and the responding (correct) backward transformation, and every composite of expressions defines a structured way of gluing smaller bidirectional transformations to a bigger one. Despite its usefulness for bidirectional transformation on lists and trees, it is a challenge to deal with bidirectional transformation on graphs. First, unlike lists and trees, there is no unique way of representing, constructing, or decomposing a general graph, and this requires a more precise definition of \emph{equivalence} between two graphs. Second, graphs have \emph{shared node and cycles}, which makes both forward and backward trasformation computation more complicated than that on trees; na\"{i}ve computation would visit the same nodes many times and possibly infinitely.
+
+In our previous work, we challenged the probelm by showing that the linguistic approach can be applied to bidirectional transformation on graphs, where a cleawr bidirectional semantics is given for UnCAL, a graph algebra for the known graph query language UnQL. The key to this success is the bulk semantics of the structural recursion function a structural recursion is evaluated by first processing \emph{in parallel} on all edges of the input graph and then combining the results. This bulk semantics relies on introduction of $\epsilon$-edges to grapohs, providing a smart way of treating shared nodes and cycles in graphs and of tracing back from the view to the source.
+
+However, the graphs that can be dealt with in this manner must be unorered. It has not yet been known how to treat ordered graphs such as XML graphs in which the child nodes of a node are ordered. One might consider encoding the ordered graphs in terms of unordered ones by introducing specialized edge labels, but this would make it difficult to keep consistency of these labels during transformation. In fact, it is an open problem, as pointed out in, how labels during tranformation on ordered graphs. In , a transformation language for ordered graph $\lambda_{FG}$ is provided, a bulk semantics for transformation on ordered graphs is also given. Thus, a natural question is how can we bidirectionalize transforamtion on ordered graphs via $\lambda_{FG}$.
+
+In this paper, we show that the ordered graphs can be bidirectionalized. The work is based on the equivalence relation of bisimilarity and the query language $\lambda_{FG}$ on ordered graphs. The main technical contributions are three folds. First, a novel three-stage bidirectional transformation strategy is designed for ordered graphs. Next we give a bidirectionalized procedure to eliminate $\epsilon$-edges. Finally, we construct a bidirectional evaluation semantics for $\lambda_{FG}$. 
 
 \section{Preliminaries}\label{sec:pre}
 
@@ -185,11 +202,11 @@ The (GETPUT) property states that unchanged view $G$ should give no change on th
 The proposed forward and backward evaluations are well-behaved, provided their evaluations succeed.
 \end{theorem}
 
-According to the (WPUTGET) property, given a certain forward evaluation function, there could be more than one backward evaluation that would satisfy the well-behavedness property. When we perform the modification on the view, the most reasonable choice is to reflet it on the corresponding part on the source. This is the \emph{location correspondence} property. Moreover, the modification on the view graph could be categorised into three types: in place updates, edge deletion and edge insertion. In order to maintain the well-behavedness between the updated source and the modified view, we also need to apply some operation on the source. A reasonable assumption is that a certain type of modification on the view yields the same type of operation on the source, which could be called the \emph{operation correspondence} property.
+According to the (WPUTGET) property, given a certain forward evaluation function, there could be more than one backward evaluation that would satisfy the well-behavedness property. When we perform the modification on the view, the most reasonable choice is to reflet it on the corresponding part on the source. This is the \emph{location correspondence} property. Moreover, the modification on the view graph could be categorised into three types: in place updates, edge deletion and edge insertion. In order to maintain the well-behavedness between the updated source and the modified view, we also need to apply some operation on the source. A reasonable assumption is that a certain type of modification on the view yields the same type of operation on the source, which could be called the \emph{operation correspondence} property. We say this kind of reflection on updates are rational.
 
-\begin{theorem}[Rationality]\label{th:rat}
-The proposed bidirectional transformation on $\lambda_{FG}$, satisfies both location and operation correspondence property. We call it a rational transformation.
-\end{theorem}
+%\begin{theorem}[Rationality]\label{th:rat}
+%The proposed bidirectional transformation on $\lambda_{FG}$, satisfies both location and operation correspondence property. We call it a rational transformation.
+%\end{theorem}
 
 The rationality property is also important as it gives us a discriptive goal in designing the bidirectionalizing the transformation. The goal is to let the updates on the source to meet the intention of the changing on the view.
 
@@ -629,7 +646,35 @@ Using this function, we compute the set of corresponding edges from set of delet
 
 Finally, get the updated view $G_{view}''=\mathscr{F}\ldbrack e\rdbrack\rho[\$g\rightarrow G_{src}']$ in order to keep the consistancy of the well-behavedness between updated source and view. Moreover, we need to check if this updated view is bisimilar to the changed view $G_{view}'$.
 
+The (WPUTGET) property is straight forward, since our final check actually will promise that. Thus the backward transformation on edge deletion is also well-behaved.
+
 \subsection{Reflection of Edge Insertion}\label{subsec:bak-ins}
+
+The method used in previous work of handling insertion in unordered graph can be adopted here.
+
+The insertion operation on the view is specified by a triple of a node $v$ on the view and the position $i$ where a graph is inserted, and the inserted graph $G_{vins}$. Then we first compute the corresponding source node $u$ at which insertion of corresponding subgraph $G_{sins}$ takes plase, by the following function $tr$.
+
+$tr(SrcID)=SrcID\quad tr(RecN\,\_\,v\,\_)=tr(v)$
+
+$tr(Code\,\_\,\_)=FAIL\quad tr(RecE\,\_\,v\,\_\,\_)=tr(v)$
+
+$tr(RecD\,\_\,v\,\_\,\_)=tr(v)\quad tr(RecM\,\_\,\_\,\_\,\_)=FAIL$
+
+We find a graph $G_{sins}$ connected to $u$ and the corresponding position $j$ at which $G_{sins}$ is connected ,by inversion computation on $G_{view}'$ using the Universal Resolving Algorithm (URA), wherer $G_{view}'$ is obtained by adding $\epsilon$-edge from $v$ at position $i$ to $G_{vins}$.
+
+We conjecture that well-behavedness of the above insertion reflection can be directly derived from the soundness of URA.
+
+\subsection{Well-Behavedness}
+
+Now, according to the inductive way of building the bidirectional semantics, we have the well-behavedness property.
+
+\begin{proof}
+For the bidirectional evaluation semantics, this statement can be proved by induction on the structural of expression $e$, in a way similar to that in unordered graph. Note that we perform aggressive check for branch changing behavior of \textbf{if} for this well-behavedness. Further, the bidirectionalization of $\epsilon$-elimination procedure is also well-behaved. Thus Theorem\ref{th:wellb} is proved.
+\end{proof}
+
 \section{Conclusion}\label{sec:con}
+
+In this paper, we give a way of bidirectionalizing the transformation on ordered graphs. A three-stage bidirectionalizing strategy is provided, and we proved that each stage could be bidirectionalized. 
+
 
 \end{document}
