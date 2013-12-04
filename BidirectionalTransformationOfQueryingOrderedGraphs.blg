@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: BidirectionalTransformationOfQueryingOrderedGraphs.aux
+The style file: plain.bst
+Database file #1: bidirectional.bib
+I was expecting a `,' or a `}'---line 171 of file bidirectional.bib
+ :   pages = 305
+ :              --318,
+I'm skipping whatever remains of this entry
+Warning--can't use both volume and number fields in Foster2005
+Warning--empty booktitle in Hidaka2013
+Warning--can't use both volume and number fields in Matsuda2007
+Warning--can't use both volume and number fields in Voigtlander2009
+Warning--can't use both volume and number fields in Voigtlander2010
+Warning--can't use both volume and number fields in Wang2011
+You've used 14 entries,
+            2118 wiz_defined-function locations,
+            599 strings with 6744 characters,
+and the built_in function-call counts, 6195 in all, are:
+= -- 629
+> -- 289
+< -- 13
++ -- 115
+- -- 100
+* -- 447
+:= -- 953
+add.period$ -- 50
+call.type$ -- 14
+change.case$ -- 91
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 246
+empty$ -- 468
+format.name$ -- 100
+if$ -- 1350
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 14
+newline$ -- 73
+num.names$ -- 28
+pop$ -- 107
+preamble$ -- 1
+purify$ -- 78
+quote$ -- 0
+skip$ -- 188
+stack$ -- 0
+substring$ -- 395
+swap$ -- 99
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 54
+warning$ -- 6
+while$ -- 58
+width$ -- 16
+write$ -- 166
+(There was 1 error message)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.11.20)  3 DEC 2013 17:36
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.11.20)  4 DEC 2013 17:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -799,37 +799,37 @@ LaTeX Font Info:    Redeclaring math accent \widetilde on input line 946.
 (./BidirectionalTransformationOfQueryingOrderedGraphs.aux)
 \openout1 = `BidirectionalTransformationOfQueryingOrderedGraphs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 33.
-LaTeX Font Info:    Try loading font information for OML+txmi on input line 33.
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 35.
+LaTeX Font Info:    Try loading font information for OML+txmi on input line 35.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 33.
-LaTeX Font Info:    Try loading font information for OMS+txsy on input line 33.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 35.
+LaTeX Font Info:    Try loading font information for OMS+txsy on input line 35.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 33.
-LaTeX Font Info:    Try loading font information for OMX+txex on input line 33.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 35.
+LaTeX Font Info:    Try loading font information for OMX+txex on input line 35.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Try loading font information for OT1+txr on input line 33.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Try loading font information for OT1+txr on input line 35.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
@@ -895,61 +895,71 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+txsya on input line 34.
+LaTeX Font Info:    Try loading font information for U+txsya on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsya.fd
 File: utxsya.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+txsyb on input line 34.
+LaTeX Font Info:    Try loading font information for U+txsyb on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsyb.fd
 File: utxsyb.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+txmia on input line 34.
+LaTeX Font Info:    Try loading font information for U+txmia on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxmia.fd
 File: utxmia.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+txsyc on input line 34.
+LaTeX Font Info:    Try loading font information for U+txsyc on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+txexa on input line 34.
+LaTeX Font Info:    Try loading font information for U+txexa on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 34.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 34.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Try loading font information for OT1+txtt on input line 34.
+LaTeX Font Info:    Try loading font information for OT1+txtt on input line 36.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/ot1txtt.fd
 File: ot1txtt.fd 2000/12/15 v3.1
-) [1
+)
+LaTeX Font Info:    Try loading font information for OMS+txtt on input line 36.
+
+LaTeX Font Info:    No file OMStxtt.fd. on input line 36.
+
+
+LaTeX Font Warning: Font shape `OMS/txtt/m/n' undefined
+(Font)              using `OMS/txsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 36.
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-<fig1.png, id=17, 727.21687pt x 388.45125pt>
+<fig1.png, id=16, 727.21687pt x 388.45125pt>
 File: fig1.png Graphic file (type png)
  <use fig1.png>
-Package pdftex.def Info: fig1.png used on input line 80.
+Package pdftex.def Info: fig1.png used on input line 82.
 (pdftex.def)             Requested size: 277.69987pt x 148.34206pt.
-LaTeX Font Info:    Try loading font information for OMS+txr on input line 86.
+LaTeX Font Info:    Try loading font information for OMS+txr on input line 88.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omstxr.fd
 File: omstxr.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <10> not available
-(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 86.
+(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 88.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1960) has occurred while \output is active []
 
  [3 <./fig1.png>]
 Missing character: There is no Т in font txr!
@@ -957,7 +967,7 @@ Missing character: There is no Ё in font txr!
 Missing character: There is no Т in font txr!
 Missing character: There is no Џ in font txr!
  [4]
-Overfull \hbox (7.47713pt too wide) in paragraph at lines 121--122
+Overfull \hbox (7.47713pt too wide) in paragraph at lines 123--124
 []\OT1/txr/m/n/10 Marker Cor-re-spon-dence: if $\OML/txmi/m/it/10 B\U/matha/m/n
 /10 p\OML/txmi/m/it/10 v[]\U/matha/m/n/10 q\OML/txmi/m/it/10 :i[] \OT1/txr/m/n/
 10 = []\U/matha/m/n/10 p\OT1/txr/m/n/10 &\OML/txmi/m/it/10 y\U/matha/m/n/10 q$ 
@@ -968,10 +978,10 @@ Overfull \hbox (7.47713pt too wide) in paragraph at lines 121--122
 
 
 LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
-(Font)              using `U/stmry/m/n' instead on input line 127.
+(Font)              using `U/stmry/m/n' instead on input line 129.
 
 
-Overfull \hbox (24.57544pt too wide) detected at line 146
+Overfull \hbox (24.57544pt too wide) detected at line 148
 []
  []
 
@@ -980,24 +990,24 @@ Underfull \vbox (badness 2213) has occurred while \output is active []
 
  [5]
 [6] [7] [8] [9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--318
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
 [12]
-Overfull \hbox (51.84146pt too wide) in paragraph at lines 395--402
+Overfull \hbox (51.84146pt too wide) in paragraph at lines 397--404
 []\OML/txmi/m/it/10 B[] \OT1/txr/m/n/10 = \U/matha/m/n/10 t\OML/txmi/m/it/10 Re
 cE p w u i \U/matha/m/n/10 об [][] \OMS/txsy/m/n/10 j\U/matha/m/n/10 p\OML/txmi
 /m/it/10 u \U/matha/m/n/10 об
  []
 
 
-Overfull \hbox (0.38454pt too wide) in paragraph at lines 403--406
+Overfull \hbox (0.38454pt too wide) in paragraph at lines 405--408
 []\OML/txmi/m/it/10 I[] \OT1/txr/m/n/10 = \U/matha/m/n/10 t\OT1/txr/m/n/10 &\OM
 L/txmi/m/it/10 m \U/matha/m/n/10 об \OML/txmi/m/it/10 RecM p \OT1/txr/m/n/10 &\
 OML/txmi/m/it/10 m u i\OMS/txsy/m/n/10 j\U/matha/m/n/10 p\OML/txmi/m/it/10 u \U
@@ -1009,21 +1019,21 @@ xr/m/n/10 &\OML/txmi/m/it/10 m \U/matha/m/n/10 P
  []
 
 
-Overfull \hbox (13.22504pt too wide) in paragraph at lines 407--413
+Overfull \hbox (13.22504pt too wide) in paragraph at lines 409--415
 []\OML/txmi/m/it/10 B[] \OT1/txr/m/n/10 = \U/matha/m/n/10 t\OML/txmi/m/it/10 Re
 cN p u \OT1/txr/m/n/10 &\OML/txmi/m/it/10 m \U/matha/m/n/10 об [][] \OMS/txsy/m
 /n/10 j\OML/txmi/m/it/10 u \U/matha/m/n/10 P
  []
 
 
-Overfull \hbox (32.62823pt too wide) in paragraph at lines 421--430
+Overfull \hbox (32.62823pt too wide) in paragraph at lines 423--432
 []\OML/txmi/m/it/10 B[] \OT1/txr/m/n/10 = \U/matha/m/n/10 t\OML/txmi/m/it/10 Re
 cD p u v \U/matha/m/n/10 об [][] \OMS/txsy/m/n/10 j\OML/txmi/m/it/10 v \U/matha
 /m/n/10 P
  []
 
 
-Overfull \hbox (13.37737pt too wide) in paragraph at lines 421--430
+Overfull \hbox (13.37737pt too wide) in paragraph at lines 423--432
 []\OML/txmi/m/it/10 I[] \OT1/txr/m/n/10 = \U/matha/m/n/10 tp\OT1/txr/m/n/10 &\O
 ML/txmi/m/it/10 m; \OT1/txr/m/n/10 &\OML/txmi/m/it/10 y\U/matha/m/n/10 q об \OM
 L/txmi/m/it/10 u\OMS/txsy/m/n/10 j\OT1/txr/m/n/10 &\OML/txmi/m/it/10 m \U/matha
@@ -1036,12 +1046,12 @@ p\OT1/txr/m/n/10 &\OML/txmi/m/it/10 y\U/matha/m/n/10 q\OML/txmi/m/it/10 ;  v[]
  []
 
 [13] [14] [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 597--600
+Underfull \hbox (badness 10000) in paragraph at lines 599--602
 
  []
 
 
-Overfull \hbox (2.99767pt too wide) in paragraph at lines 601--610
+Overfull \hbox (2.99767pt too wide) in paragraph at lines 603--612
 []\OML/txmi/m/it/10 I[] \OT1/txr/m/n/10 = \U/matha/m/n/10 t\OT1/txr/m/n/10 &\OM
 L/txmi/m/it/10 m \U/matha/m/n/10 об \OML/txmi/m/it/10 w\OMS/txsy/m/n/10 j\OML/t
 xmi/m/it/10 u \U/matha/m/n/10 P \OML/txmi/m/it/10 V;  \U/matha/m/n/10 p\OML/txm
@@ -1053,19 +1063,20 @@ t/10 ;  x:i:I\U/matha/m/n/10 p\OT1/txr/m/n/10 &\OML/txmi/m/it/10 m\U/matha/m/n/
 10 q \OT1/txr/m/n/10 =
  []
 
-[17] [18] [19] (./BidirectionalTransformationOfQueryingOrderedGraphs.aux)
+[17] [18] (./BidirectionalTransformationOfQueryingOrderedGraphs.bbl [19])
+[20] (./BidirectionalTransformationOfQueryingOrderedGraphs.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5418 strings out of 493485
- 71244 string characters out of 3143525
- 133382 words of memory out of 3000000
- 8504 multiletter control sequences out of 15000+200000
- 77643 words of font info for 202 fonts, out of 3000000 for 9000
+ 5445 strings out of 493485
+ 71621 string characters out of 3143525
+ 133652 words of memory out of 3000000
+ 8523 multiletter control sequences out of 15000+200000
+ 79197 words of font info for 205 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,10n,24p,1273b,243s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,10n,24p,1273b,260s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/linearA/LinearACmplxSigns.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/share/texlive/
@@ -1082,11 +1093,11 @@ nts/type1/public/txfonts/txtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on BidirectionalTransformationOfQueryingOrderedGraphs.pdf (19 pa
-ges, 227771 bytes).
+Output written on BidirectionalTransformationOfQueryingOrderedGraphs.pdf (20 pa
+ges, 234584 bytes).
 PDF statistics:
- 136 PDF objects out of 1000 (max. 8388607)
- 96 compressed objects within 1 object stream
+ 139 PDF objects out of 1000 (max. 8388607)
+ 98 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

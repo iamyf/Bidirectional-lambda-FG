@@ -1,0 +1,87 @@
+\begin{thebibliography}{10}
+
+\bibitem{Bancilhon1981}
+Fran{\c{c}}ois Bancilhon and Nicolas Spyratos.
+\newblock Update semantics of relational views.
+\newblock {\em ACM Transactions on Database Systems (TODS)}, 6(4):557--575,
+  1981.
+
+\bibitem{Bohannon2008}
+Aaron Bohannon, J~Nathan Foster, Benjamin~C Pierce, Alexandre Pilkiewicz, and
+  Alan Schmitt.
+\newblock Boomerang: Resourceful lenses for string data.
+\newblock {\em ACM SIGPLAN Notices}, 43(1):407--419, 2008.
+
+\bibitem{Buneman2000}
+Peter Buneman, Mary Fernandez, and Dan Suciu.
+\newblock Unql: a query language and algebra for semistructured data based on
+  structural recursion.
+\newblock {\em The VLDB Journal: The International Journal on Very Large Data
+  Bases}, 9(1):76--110, 2000.
+
+\bibitem{Czarnecki2009}
+Krzysztof Czarnecki, J~Nathan Foster, Zhenjiang Hu, Ralf L{\"a}mmel, Andy
+  Sch{\"u}rr, and James~F Terwilliger.
+\newblock Bidirectional transformations: A cross-discipline perspective.
+\newblock In {\em Theory and Practice of Model Transformations}, pages
+  260--283. Springer, 2009.
+
+\bibitem{Foster2005}
+J~Nathan Foster, Michael~B Greenwald, Jonathan~T Moore, Benjamin~C Pierce, and
+  Alan Schmitt.
+\newblock Combinators for bi-directional tree transformations: a linguistic
+  approach to the view update problem.
+\newblock In {\em ACM SIGPLAN Notices}, volume~40, pages 233--246. ACM, 2005.
+
+\bibitem{Hegner1990}
+Stephen~J Hegner.
+\newblock Foundations of canonical update support for closed database views.
+\newblock In {\em ICDT'90}, pages 422--436. Springer, 1990.
+
+\bibitem{Hidaka2013}
+Soichiro Hidaka, Kazuyuki Asada, Zhenjiang Hu, Hiroyuki Kato, and Keisuke
+  Nakano.
+\newblock Structural recursion for querying ordered graphs.
+\newblock page 305. ACM, September 2013.
+\newblock ICFP'13.
+
+\bibitem{Hidaka2010}
+Soichiro Hidaka, Zhenjiang Hu, Kazuhiro Inaba, Hiroyuki Kato, Kazutaka Matsuda,
+  and Keisuke Nakano.
+\newblock Bidirectionalizing graph transformations.
+\newblock In {\em ACM SIGPLAN International Conference on Functional
+  Programming}, pages 205--216. ACM, 2010.
+
+\bibitem{Hu2008}
+Zhenjiang Hu, Shin-Cheng Mu, and Masato Takeichi.
+\newblock A programmable editor for developing structured documents based on
+  bidirectional transformations.
+\newblock {\em Higher-Order and Symbolic Computation}, 21(1-2):89--118, 2008.
+
+\bibitem{Matsuda2007}
+Kazutaka Matsuda, Zhenjiang Hu, Keisuke Nakano, Makoto Hamana, and Masato
+  Takeichi.
+\newblock {\em Bidirectionalization transformation based on automatic
+  derivation of view complement functions}, volume~42.
+\newblock ACM, 2007.
+
+\bibitem{Meertens1998}
+Lambert Meertens.
+\newblock Designing constraint maintainers for user interaction, 1998.
+
+\bibitem{Voigtlander2009}
+Janis Voigtl{\"a}nder.
+\newblock Bidirectionalization for free!(pearl).
+\newblock In {\em ACM SIGPLAN Notices}, volume~44, pages 165--176. ACM, 2009.
+
+\bibitem{Voigtlander2010}
+Janis Voigtl{\"a}nder, Zhenjiang Hu, Kazutaka Matsuda, and Meng Wang.
+\newblock Combining syntactic and semantic bidirectionalization.
+\newblock In {\em ACM Sigplan Notices}, volume~45, pages 181--192. ACM, 2010.
+
+\bibitem{Wang2011}
+Meng Wang, Jeremy Gibbons, and Nicolas Wu.
+\newblock Incremental updates for efficient bidirectional transformations.
+\newblock In {\em ACM SIGPLAN Notices}, volume~46, pages 392--403. ACM, 2011.
+
+\end{thebibliography}
